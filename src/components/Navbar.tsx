@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Icon } from '@iconify/react'
 import { CommandPalette } from './CommandPalette'
+import { audio } from '../utils/audio'
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isPaletteOpen, setIsPaletteOpen] = useState(false)
+  const [isMuted, setIsMuted] = useState(audio.getMuteState())
 
   // Listen for Ctrl+K / Cmd+K shortcuts to open palette
   useEffect(() => {
@@ -47,6 +49,20 @@ export const Navbar: React.FC = () => {
 
           {/* CTA / Actions */}
           <div className="flex items-center gap-4">
+            <button 
+              onClick={() => {
+                const newState = audio.toggleMute()
+                setIsMuted(newState)
+                if (!newState) {
+                  audio.playClick()
+                }
+              }}
+              className="text-zinc-400 hover:text-white transition-colors flex items-center justify-center p-2 border border-white/10 rounded bg-white/5"
+              aria-label={isMuted ? "Unmute site audio" : "Mute site audio"}
+            >
+              <Icon icon={isMuted ? "solar:volume-cross-linear" : "solar:volume-loud-linear"} width="16" />
+            </button>
+
             <button 
               onClick={() => setIsPaletteOpen(true)}
               className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5 border border-white/10 px-3 py-1.5 rounded bg-white/5 text-xs font-light"

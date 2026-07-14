@@ -18,6 +18,10 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
   }
+  @keyframes bar-wave {
+    0%, 100% { height: 4px; }
+    50% { height: 14px; }
+  }
 }
 
 /* Custom Utilities */

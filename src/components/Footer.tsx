@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import { SpotifyWidget } from './SpotifyWidget'
 
 export const Footer: React.FC = () => {
   return (
@@ -11,8 +12,9 @@ export const Footer: React.FC = () => {
               Lex<span className="text-lime-400">man</span>
             </a>
             <p className="text-zinc-500 text-sm font-light max-w-xs leading-relaxed">
-              Alex Okhitoya (Lexman). Backend &amp; AI Engineer building scalable distributed systems and LLMOps infrastructures.
+              Alex Okhitoya (Lexman). Backend &amp; AI Engineer building scalable distributed systems, AI orchestrations, and LLMOps pipelines.
             </p>
+            <SpotifyWidget />
           </div>
           <div>
             <h4 className="text-white font-medium mb-4 text-sm">Navigation</h4>

@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 
 export const TechSpecs: React.FC = () => {
   return (
-    <section className="py-32 relative z-10 overflow-hidden border-t border-white/5">
+    <section id="techspecs" className="py-32 relative z-10 overflow-hidden border-t border-white/5">
       <div className="max-w-3xl mx-auto px-6">
         {/* Left: Tech Accordion */}
         <div className="space-y-8 reveal-on-scroll visible">
@@ -25,11 +25,11 @@ export const TechSpecs: React.FC = () => {
             
             <details className="group py-6 cursor-pointer">
               <summary className="flex justify-between items-center text-lg font-medium list-none">
-                <span>LLMOps &amp; AI Tracing</span>
+                <span>AI Engineering &amp; LLMOps</span>
                 <Icon icon="solar:add-circle-linear" className="text-zinc-500 group-open:rotate-45 transition-transform" />
               </summary>
               <p className="text-zinc-400 font-light mt-4 text-sm leading-relaxed">
-                Integrating Langfuse to monitor cost, latency, token throughput, and precision score evaluations across complex LLM and RAG execution runs.
+                Orchestrating LLM reasoning pipelines, designing Team Multi-Agent Collaboration (T-MAC) frameworks, structuring Pydantic schema validation boundaries, and tracing execution chains with Langfuse.
               </p>
             </details>
             <div className="border-b border-white/10"></div>
