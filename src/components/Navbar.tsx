@@ -34,6 +34,15 @@ export const Navbar: React.FC = () => {
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#experience" className="hover:text-white transition-colors">Experience</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <a 
+              href="/Alex-Okhitoya-AI-Engineer.pdf"
+              download="Alex-Okhitoya-AI-Engineer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-lime-400 hover:text-lime-350 transition-colors font-semibold"
+            >
+              Resume
+            </a>
           </div>
 
           {/* CTA / Actions */}
@@ -85,9 +94,19 @@ export const Navbar: React.FC = () => {
             <a 
               href="#contact" 
               onClick={() => setIsOpen(false)} 
-              className="hover:text-white transition-colors py-2 block"
+              className="hover:text-white transition-colors py-2 border-b border-white/5 block"
             >
               Contact
+            </a>
+            <a 
+              href="/Alex-Okhitoya-AI-Engineer.pdf"
+              download="Alex-Okhitoya-AI-Engineer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)} 
+              className="text-lime-400 hover:text-lime-300 transition-colors py-2 block font-semibold"
+            >
+              Resume
             </a>
           </div>
         )}
