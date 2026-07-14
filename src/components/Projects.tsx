@@ -22,7 +22,7 @@ export const Projects: React.FC = () => {
       category: 'Academic Essay Review Agentic System',
       desc: 'Agentic feedback and revision platform for academic writing, leveraging the Argrewrite and ASAP corpus datasets.',
       tech: ['FastAPI', 'Argrewrite', 'ASAP Corpus', 'Google Colab', 'uv', 'Alembic', 'Python'],
-      link: 'https://github.com/lexmanthefirst'
+      link: 'https://github.com/lexmanthefirst/AEREAS'
     }
   ]
 
