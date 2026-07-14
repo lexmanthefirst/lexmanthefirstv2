@@ -4,6 +4,7 @@ import { NoiseBg } from '../components/NoiseBg'
 import { GlowBg } from '../components/GlowBg'
 import { Navbar } from '../components/Navbar'
 import { Footer } from '../components/Footer'
+import { Preloader } from '../components/Preloader'
 import { audio } from '../utils/audio'
 
 const RootComponent: React.FC = () => {
@@ -16,6 +17,7 @@ const RootComponent: React.FC = () => {
 
   return (
     <div onClick={handleGlobalClick}>
+      <Preloader />
       <NoiseBg />
       <GlowBg />
       <Navbar />
