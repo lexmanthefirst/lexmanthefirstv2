@@ -66,7 +66,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitle: 'Open mail client to email Lexman',
       icon: 'solar:unread-linear',
       action: () => {
-        window.location.href = 'mailto:Lexmanthefirst@gmail.com'
+        window.location.href = 'mailto:hello@lextoya.me'
         onClose()
       }
     }

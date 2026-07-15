@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <a href="#" className="text-2xl font-medium tracking-tighter text-white uppercase mb-6 block">
+            <a href="#" className="logo-font text-3xl md:text-4xl text-white mb-6 block leading-none">
               Lex<span className="text-lime-400">man</span>
             </a>
             <p className="text-zinc-500 text-sm font-light max-w-xs leading-relaxed">
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm text-zinc-500 font-light">
               <li><a href="https://github.com/lexmanthefirst" target="_blank" rel="noopener noreferrer" className="hover:text-lime-400 transition-colors">GitHub</a></li>
               <li><a href="https://www.linkedin.com/in/okhitoya-alex/" target="_blank" rel="noopener noreferrer" className="hover:text-lime-400 transition-colors">LinkedIn</a></li>
-              <li><a href="mailto:Lexmanthefirst@gmail.com" className="hover:text-lime-400 transition-colors">Email</a></li>
+              <li><a href="mailto:hello@lextoya.me" className="hover:text-lime-400 transition-colors">Email</a></li>
               <li><a href="https://x.com/lexmanthefirst" target="_blank" rel="noopener noreferrer" className="hover:text-lime-400 transition-colors">X</a></li>
             </ul>
           </div>
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
               <a href="https://x.com/lexmanthefirst" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)">
                 <Icon icon="ri:twitter-x-fill" className="hover:text-lime-400 cursor-pointer transition-colors" />
               </a>
-              <a href="mailto:Lexmanthefirst@gmail.com" aria-label="Email">
+              <a href="mailto:hello@lextoya.me" aria-label="Email">
                 <Icon icon="solar:letter-linear" className="hover:text-lime-400 cursor-pointer transition-colors" />
               </a>
             </div>

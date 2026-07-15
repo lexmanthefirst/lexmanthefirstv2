@@ -29,7 +29,7 @@ export const TechSpecs: React.FC = () => {
                 <Icon icon="solar:add-circle-linear" className="text-zinc-500 group-open:rotate-45 transition-transform" />
               </summary>
               <p className="text-zinc-400 font-light mt-4 text-sm leading-relaxed">
-                Orchestrating LLM reasoning pipelines, designing Team Multi-Agent Collaboration (T-MAC) frameworks, structuring Pydantic schema validation boundaries, and tracing execution chains with Langfuse.
+                Orchestrating LLM reasoning pipelines, designing multi-agent systems, structuring Pydantic schema validation boundaries, and tracing execution chains with Langfuse.
               </p>
             </details>
             <div className="border-b border-white/10"></div>

@@ -7,6 +7,8 @@ import { Footer } from '../components/Footer'
 import { Preloader } from '../components/Preloader'
 import { audio } from '../utils/audio'
 
+import { Toaster } from 'sonner'
+
 const RootComponent: React.FC = () => {
   const handleGlobalClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement
@@ -17,6 +19,7 @@ const RootComponent: React.FC = () => {
 
   return (
     <div onClick={handleGlobalClick}>
+      <Toaster position="bottom-right" theme="dark" />
       <Preloader />
       <NoiseBg />
       <GlowBg />

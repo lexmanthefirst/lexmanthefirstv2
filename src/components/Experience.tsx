@@ -18,7 +18,7 @@ export const Experience: React.FC = () => {
       role: 'AI Systems Developer',
       company: 'MIRA AI',
       duration: 'Jan 2026',
-      desc: 'Developed a Team Multi-Agent Collaboration (T-MAC) architecture automating chronic care follow-ups. Structured specialized worker agents (HIV, Follow-up, Clinic Critic) with streaming thought logs.',
+      desc: 'Developed multi-agent systems automating chronic care follow-ups. Structured specialized worker agents (HIV, Follow-up, Clinic Critic) with streaming thought logs.',
       highlights: [
         'Implemented real-time SSE thought streams backed by Redis Pub/Sub events.',
         'Programmed clinical logic and Pydantic validation boundaries with Google Gemini.',
@@ -54,11 +54,11 @@ export const Experience: React.FC = () => {
               }`}
             >
               {/* Timeline Node */}
-              <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-lime-400 rounded-full -translate-x-1.5 mt-6 z-20 shadow-[0_0_10px_#D4FF3E]"></div>
+              <div className="absolute left-4 md:left-1/2 w-3 h-3 bg-lime-400 rounded-full -translate-x-1.5 mt-6 z-20 shadow-[0_0_10px_#ffffff]"></div>
 
               {/* Card Container */}
               <div className="w-full md:w-[46%] ml-8 md:ml-0">
-                <div className="glass-panel p-8 group hover:-translate-y-1 transition-all duration-300">
+                <div className="glass-panel p-8 group">
                   <div className="flex justify-between items-start flex-wrap gap-2 mb-4">
                     <div>
                       <h3 className="text-2xl font-semibold text-white">{exp.role}</h3>

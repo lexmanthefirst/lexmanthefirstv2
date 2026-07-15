@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-4 w-full sm:w-auto reveal-on-scroll visible">
             <a 
               href="#projects"
-              className="px-8 py-4 bg-lime-400 text-black text-sm font-semibold tracking-wide hover:bg-lime-300 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(212,255,62,0.3)] text-center block"
+              className="px-8 py-4 bg-lime-400 text-black text-sm font-semibold tracking-wide hover:bg-lime-300 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] text-center block"
             >
               VIEW PROJECTS
             </a>
