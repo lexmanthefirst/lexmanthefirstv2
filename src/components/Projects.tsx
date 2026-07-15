@@ -22,20 +22,20 @@ export const Projects: React.FC = () => {
       // image: crosstalkPreview
     },
     {
-      name: 'MIRA AI',
-      category: 'Multi-Agent HealthTech Architecture',
-      desc: 'Clinical provider assistant using multi-agent systems with real-time SSE thought streams.',
-      tech: ['FastAPI', 'Google Gemini', 'Multi-Agent Systems', 'Redis Pub/Sub', 'Celery', 'Docker'],
-      link: 'https://github.com/gemini-hack/backend',
-      // image: miraPreview
-    },
-    {
       name: 'AEREAS',
       category: 'Academic Essay Review Agentic System',
       desc: 'Agentic feedback and revision platform for academic writing, leveraging the Argrewrite and ASAP corpus datasets.',
       tech: ['FastAPI', 'Argrewrite', 'ASAP Corpus', 'Google Colab', 'uv', 'Alembic', 'Python'],
       link: 'https://github.com/lexmanthefirst/AEREAS',
       // image: aereasPreview
+    },
+    {
+      name: 'MIRA AI',
+      category: 'Multi-Agent HealthTech Architecture',
+      desc: 'Clinical provider assistant using multi-agent systems with real-time SSE thought streams.',
+      tech: ['FastAPI', 'Google Gemini', 'Multi-Agent Systems', 'Redis Pub/Sub', 'Celery', 'Docker'],
+      link: 'https://github.com/gemini-hack/backend',
+      // image: miraPreview
     }
   ]
 

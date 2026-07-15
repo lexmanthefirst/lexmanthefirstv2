@@ -19,7 +19,7 @@ const RootComponent: React.FC = () => {
 
   return (
     <div onClick={handleGlobalClick}>
-      <Toaster position="bottom-right" theme="dark" />
+      <Toaster position="bottom-right" theme="dark" duration={2000} />
       <Preloader />
       <NoiseBg />
       <GlowBg />
