@@ -52,18 +52,42 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
+          {/* Mobile Actions (Volume & Search inside Capsule) */}
+          <div className="flex md:hidden items-center gap-1.5 ml-2 mr-1">
+            <button 
+              onClick={() => {
+                const newState = audio.toggleMute()
+                setIsMuted(newState)
+                if (!newState) {
+                  audio.playClick()
+                }
+              }}
+              className="text-zinc-400 hover:text-white transition-all flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/5 active:scale-95"
+              aria-label={isMuted ? "Unmute site audio" : "Mute site audio"}
+            >
+              <Icon icon={isMuted ? "solar:volume-cross-linear" : "solar:volume-loud-linear"} width="15" />
+            </button>
+            <button 
+              onClick={() => setIsPaletteOpen(true)}
+              className="text-zinc-400 hover:text-white transition-all flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/5 active:scale-95"
+              aria-label="Open Command Palette"
+            >
+              <Icon icon="solar:magnifer-linear" width="15" />
+            </button>
+          </div>
+
           <button 
             onClick={() => setIsOpen(!isOpen)} 
             className="md:hidden px-3 py-1.5 text-zinc-400 hover:text-white transition-colors flex items-center justify-center"
             aria-label="Toggle menu"
           >
-            <Icon icon={isOpen ? "lucide:x" : "lucide:menu"} width="20" />
+            <Icon icon={isOpen ? "hugeicons:cancel-01" : "hugeicons:menu-01"} width="20" />
           </button>
         </div>
       </nav>
 
-      {/* Floating Actions (Right) */}
-      <div className="fixed top-8 right-6 md:right-12 z-50 flex items-center gap-3">
+      {/* Floating Actions (Right) - Desktop Only */}
+      <div className="hidden md:flex fixed top-8 right-6 md:right-12 z-50 items-center gap-3">
         {/* Mute Toggle */}
         <button 
           onClick={() => {
