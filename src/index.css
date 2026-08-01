@@ -97,7 +97,7 @@ html.light .bg-\[\#121212\] {
   color: #18181b !important;
 }
 
-html.light .text-white {
+html.light .text-white:not(.bg-blue-600) {
   color: #09090b !important;
 }
 
