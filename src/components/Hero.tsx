@@ -80,7 +80,7 @@ export const Hero: React.FC = () => {
         <div className="pt-2">
           <a
             href="mailto:hello@lextoya.me"
-            className="inline-block px-6 py-2.5 bg-white text-black rounded-full text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
+            className="inline-block px-2.5 py-2.5 bg-white text-black rounded-full text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
           >
             Contact me
           </a>

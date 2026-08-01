@@ -32,7 +32,7 @@ export const Projects: React.FC = () => {
         <div className="space-y-8">
           {projects.map((project, index) => (
             <div key={index} className="flex flex-col sm:flex-row gap-5 items-start group">
-              {/* Thumbnail Container: Image */}
+              {/* Thumbnail Container: Image - fixed aspect ratio & fixed sizing across mobile/desktop */}
               <div 
                 onClick={(e) => {
                   if (project.hasVideoDemo) {
@@ -41,7 +41,7 @@ export const Projects: React.FC = () => {
                     setIsVideoModalOpen(true)
                   }
                 }}
-                className={`w-full sm:w-36 h-24 rounded-xl shrink-0 bg-zinc-900 border border-white/10 overflow-hidden flex flex-col items-center justify-center shadow-md ${
+                className={`w-36 h-24 rounded-xl shrink-0 bg-zinc-900 border border-white/10 overflow-hidden flex flex-col items-center justify-center shadow-md ${
                   project.hasVideoDemo ? 'cursor-pointer' : ''
                 } transition-colors relative group/thumb`}
               >
