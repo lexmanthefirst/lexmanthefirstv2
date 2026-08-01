@@ -1,33 +1,16 @@
 import React from 'react'
 import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { NoiseBg } from '../components/NoiseBg'
-import { GlowBg } from '../components/GlowBg'
-import { Navbar } from '../components/Navbar'
-import { Footer } from '../components/Footer'
-import { Preloader } from '../components/Preloader'
-import { audio } from '../utils/audio'
-
+import { DockNav } from '../components/DockNav'
 import { Toaster } from 'sonner'
 
 const RootComponent: React.FC = () => {
-  const handleGlobalClick = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement
-    if (target.closest('a') || target.closest('button')) {
-      audio.playClick()
-    }
-  }
-
   return (
-    <div onClick={handleGlobalClick}>
+    <div className="bg-[#121212] min-h-screen text-zinc-100 antialiased selection:bg-zinc-700 selection:text-white">
       <Toaster position="bottom-right" theme="dark" duration={2000} />
-      <Preloader />
-      <NoiseBg />
-      <GlowBg />
-      <Navbar />
-      <main className="selection:bg-lime-400 selection:text-black">
+      <main>
         <Outlet />
       </main>
-      <Footer />
+      <DockNav />
     </div>
   )
 }
