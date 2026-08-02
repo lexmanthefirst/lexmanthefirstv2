@@ -68,22 +68,22 @@ export const onRequest = async (context: {
 
     if (spotifyResponse.status === 200) {
       const trackData = await spotifyResponse.json() as any
-      if (trackData && trackData.item && trackData.is_playing) {
+      if (trackData && trackData.item) {
         return new Response(
           JSON.stringify({
-            isPlaying: true,
+            isPlaying: Boolean(trackData.is_playing),
             title: trackData.item.name,
-            artist: trackData.item.artists.map((art: any) => art.name).join(', '),
-            album: trackData.item.album.name,
-            albumImageUrl: trackData.item.album.images[0]?.url,
-            songUrl: trackData.item.external_urls.spotify,
+            artist: trackData.item.artists?.map((art: any) => art.name).join(', '),
+            album: trackData.item.album?.name,
+            albumImageUrl: trackData.item.album?.images?.[0]?.url,
+            songUrl: trackData.item.external_urls?.spotify,
           }),
           { status: 200, headers }
         )
       }
     }
 
-    // 3. Fallback: Fetch recently played track if nothing is actively playing
+    // 3. Fallback: Fetch recently played track
     const recentResponse = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -98,18 +98,33 @@ export const onRequest = async (context: {
           JSON.stringify({
             isPlaying: false,
             title: lastTrack.name,
-            artist: lastTrack.artists.map((art: any) => art.name).join(', '),
-            album: lastTrack.album.name,
-            albumImageUrl: lastTrack.album.images[0]?.url,
-            songUrl: lastTrack.external_urls.spotify,
+            artist: lastTrack.artists?.map((art: any) => art.name).join(', '),
+            album: lastTrack.album?.name,
+            albumImageUrl: lastTrack.album?.images?.[0]?.url,
+            songUrl: lastTrack.external_urls?.spotify,
           }),
           { status: 200, headers }
         )
       }
     }
 
+    // Diagnostics if both fail
+    const currentlyPlayingStatus = spotifyResponse.status
+    const recentlyPlayedStatus = recentResponse.status
+    const currentlyPlayingText = currentlyPlayingStatus !== 204 ? await spotifyResponse.text().catch(() => '') : '204 No Content'
+    const recentlyPlayedText = await recentResponse.text().catch(() => '')
+
     return new Response(
-      JSON.stringify({ isPlaying: false, message: 'No track found' }),
+      JSON.stringify({ 
+        isPlaying: false, 
+        message: 'No track found',
+        debug: {
+          currentlyPlayingStatus,
+          currentlyPlayingText,
+          recentlyPlayedStatus,
+          recentlyPlayedText
+        }
+      }),
       { status: 200, headers }
     )
   } catch (error: any) {
