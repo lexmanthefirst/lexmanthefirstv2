@@ -36,9 +36,9 @@ export const SpotifyWidget: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/40 border border-white/5 text-zinc-500 text-xs font-medium w-fit">
+      <div className="flex items-center gap-2.5 text-zinc-500 text-xs font-normal">
         <Icon icon="ri:spotify-fill" width="16" className="animate-spin text-emerald-500/70" />
-        <span className="tracking-wide">Connecting Spotify...</span>
+        <span>Connecting Spotify...</span>
       </div>
     )
   }
@@ -50,16 +50,16 @@ export const SpotifyWidget: React.FC = () => {
           href={track.songUrl || '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 p-2 pr-4 rounded-full bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-emerald-500/40 backdrop-blur-md shadow-lg shadow-black/20 transition-all duration-300 max-w-full sm:max-w-xs"
+          className="group flex items-center gap-3 p-2.5 pr-4 rounded-xl bg-zinc-900/50 hover:bg-zinc-900/80 border border-white/10 hover:border-emerald-500/40 backdrop-blur-md shadow-md transition-all duration-300 max-w-full sm:max-w-xs"
         >
-          {/* Album Cover Art */}
-          <div className="relative shrink-0 w-10 h-10 rounded-full overflow-hidden border border-white/15 shadow-md group-hover:scale-105 transition-transform duration-300">
+          {/* Spinning Vinyl Album Cover Art */}
+          <div className="relative shrink-0 w-10 h-10 rounded-full overflow-hidden border border-white/15 shadow-sm group-hover:scale-105 transition-transform duration-300">
             <img
               src={track.albumImageUrl}
               alt={track.title}
               className={`w-full h-full object-cover ${track.isPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}`}
             />
-            {/* Center vinyl hole look */}
+            {/* Center vinyl hole */}
             <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-zinc-950/80 border border-white/20"></div>
           </div>
 
@@ -68,20 +68,16 @@ export const SpotifyWidget: React.FC = () => {
             <div className="flex items-center gap-1.5 mb-0.5">
               {track.isPlaying ? (
                 <>
-                  <span className="flex items-end gap-[2px] h-2.5 w-2.5">
-                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_infinite] h-2.5"></span>
-                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_0.25s_infinite] h-3"></span>
-                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_0.5s_infinite] h-1.5"></span>
-                  </span>
-                  <span className="text-emerald-400 text-[10px] font-semibold tracking-wider uppercase">
-                    Now Playing
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-emerald-400 text-xs font-medium">
+                    Now playing
                   </span>
                 </>
               ) : (
                 <>
                   <span className="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
-                  <span className="text-zinc-400 text-[10px] font-medium tracking-wider uppercase">
-                    Last Played
+                  <span className="text-zinc-400 text-xs font-medium">
+                    Offline • Last played
                   </span>
                 </>
               )}
@@ -101,9 +97,9 @@ export const SpotifyWidget: React.FC = () => {
           </div>
         </a>
       ) : (
-        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/40 border border-white/5 text-zinc-400 text-xs font-normal w-fit">
-          <Icon icon="ri:spotify-fill" width="16" className="text-zinc-500" />
-          <span className="text-xs text-zinc-500">Not Listening</span>
+        <div className="flex items-center gap-2 text-xs text-zinc-500">
+          <Icon icon="ri:spotify-fill" width="16" className="text-zinc-500 shrink-0" />
+          <span className="font-normal text-xs">Not Listening</span>
         </div>
       )}
     </div>
