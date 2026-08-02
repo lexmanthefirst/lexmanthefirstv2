@@ -36,7 +36,7 @@ export const SpotifyWidget: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2.5 text-zinc-500 text-xs font-normal">
+      <div className="flex items-center gap-2 text-zinc-500 text-xs font-normal">
         <Icon icon="ri:spotify-fill" width="16" className="animate-spin text-emerald-500/70" />
         <span>Connecting Spotify...</span>
       </div>
@@ -65,21 +65,15 @@ export const SpotifyWidget: React.FC = () => {
 
           {/* Track Details */}
           <div className="min-w-0 flex-1 text-xs">
-            <div className="flex items-center gap-1.5 mb-0.5">
+            <div className="mb-0.5">
               {track.isPlaying ? (
-                <>
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="text-emerald-400 text-xs font-medium">
-                    Now playing
-                  </span>
-                </>
+                <span className="text-emerald-400 text-xs font-medium block">
+                  Now playing
+                </span>
               ) : (
-                <>
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
-                  <span className="text-zinc-400 text-xs font-medium">
-                    Offline • Last played
-                  </span>
-                </>
+                <span className="text-zinc-400 text-xs font-medium block">
+                  Offline • Last played
+                </span>
               )}
             </div>
 
