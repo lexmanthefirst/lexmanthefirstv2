@@ -30,73 +30,80 @@ export const SpotifyWidget: React.FC = () => {
 
   useEffect(() => {
     fetchNowPlaying()
-    const interval = setInterval(fetchNowPlaying, 30000)
+    const interval = setInterval(fetchNowPlaying, 15000)
     return () => clearInterval(interval)
   }, [])
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 text-zinc-500 text-xs font-normal">
-        <Icon icon="ri:spotify-fill" width="14" className="animate-pulse" />
-        <span>Spotify</span>
+      <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/40 border border-white/5 text-zinc-500 text-xs font-medium w-fit">
+        <Icon icon="ri:spotify-fill" width="16" className="animate-spin text-emerald-500/70" />
+        <span className="tracking-wide">Connecting Spotify...</span>
       </div>
     )
   }
 
   return (
-    <div className="flex items-center gap-3.5">
+    <div className="w-full sm:w-auto">
       {track.title && track.albumImageUrl ? (
-        <>
-          <a 
-            href={track.songUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="relative shrink-0 w-8 h-8 rounded-md overflow-hidden group border border-white/10"
-          >
-            <img 
-              src={track.albumImageUrl} 
-              alt={track.title} 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+        <a
+          href={track.songUrl || '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 p-2 pr-4 rounded-full bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-emerald-500/40 backdrop-blur-md shadow-lg shadow-black/20 transition-all duration-300 max-w-full sm:max-w-xs"
+        >
+          {/* Album Cover Art */}
+          <div className="relative shrink-0 w-10 h-10 rounded-full overflow-hidden border border-white/15 shadow-md group-hover:scale-105 transition-transform duration-300">
+            <img
+              src={track.albumImageUrl}
+              alt={track.title}
+              className={`w-full h-full object-cover ${track.isPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}`}
             />
-          </a>
+            {/* Center vinyl hole look */}
+            <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-zinc-950/80 border border-white/20"></div>
+          </div>
 
-          <div className="min-w-0 text-xs">
+          {/* Track Details */}
+          <div className="min-w-0 flex-1 text-xs">
             <div className="flex items-center gap-1.5 mb-0.5">
               {track.isPlaying ? (
                 <>
                   <span className="flex items-end gap-[2px] h-2.5 w-2.5">
-                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_infinite]"></span>
-                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.3s_infinite] h-2"></span>
-                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.6s_infinite]"></span>
+                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_infinite] h-2.5"></span>
+                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_0.25s_infinite] h-3"></span>
+                    <span className="bg-emerald-400 w-[2.5px] rounded-full animate-[bar-wave_1s_ease-in-out_0.5s_infinite] h-1.5"></span>
                   </span>
-                  <span className="text-emerald-400 text-[10px] font-semibold tracking-wide uppercase">
+                  <span className="text-emerald-400 text-[10px] font-semibold tracking-wider uppercase">
                     Now Playing
                   </span>
                 </>
               ) : (
                 <>
-                  <Icon icon="ri:spotify-fill" width="12" className="text-zinc-400 shrink-0" />
-                  <span className="text-zinc-400 text-[10px] font-medium tracking-wide uppercase">
-                    Offline • Last Played
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
+                  <span className="text-zinc-400 text-[10px] font-medium tracking-wider uppercase">
+                    Last Played
                   </span>
                 </>
               )}
             </div>
-            <a 
-              href={track.songUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="font-medium text-white hover:underline truncate block max-w-[180px]"
-            >
+
+            <p className="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors truncate max-w-[140px] xs:max-w-[180px] sm:max-w-[170px] text-[13px] leading-tight">
               {track.title}
-            </a>
-            <span className="text-[11px] text-zinc-500 truncate block max-w-[180px]">{track.artist}</span>
+            </p>
+            <p className="text-[11px] text-zinc-400 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-[170px]">
+              {track.artist}
+            </p>
           </div>
-        </>
+
+          {/* Spotify Icon */}
+          <div className="shrink-0 pl-1 text-zinc-400 group-hover:text-emerald-400 transition-colors">
+            <Icon icon="ri:spotify-fill" width="18" />
+          </div>
+        </a>
       ) : (
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
-          <Icon icon="ri:spotify-fill" width="16" className="text-zinc-500 shrink-0" />
-          <span className="font-normal text-xs">Not Listening</span>
+        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-zinc-900/40 border border-white/5 text-zinc-400 text-xs font-normal w-fit">
+          <Icon icon="ri:spotify-fill" width="16" className="text-zinc-500" />
+          <span className="text-xs text-zinc-500">Not Listening</span>
         </div>
       )}
     </div>
