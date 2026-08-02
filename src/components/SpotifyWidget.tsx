@@ -45,7 +45,7 @@ export const SpotifyWidget: React.FC = () => {
 
   return (
     <div className="flex items-center gap-3.5">
-      {track.isPlaying && track.albumImageUrl ? (
+      {track.title && track.albumImageUrl ? (
         <>
           <a 
             href={track.songUrl} 
@@ -62,14 +62,25 @@ export const SpotifyWidget: React.FC = () => {
 
           <div className="min-w-0 text-xs">
             <div className="flex items-center gap-1.5 mb-0.5">
-              <span className="flex items-end gap-[2px] h-2.5 w-2.5">
-                <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_infinite]"></span>
-                <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.3s_infinite] h-2"></span>
-                <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.6s_infinite]"></span>
-              </span>
-              <span className="text-emerald-400 text-[10px] font-semibold tracking-wide uppercase">
-                Now Playing
-              </span>
+              {track.isPlaying ? (
+                <>
+                  <span className="flex items-end gap-[2px] h-2.5 w-2.5">
+                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_infinite]"></span>
+                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.3s_infinite] h-2"></span>
+                    <span className="bg-emerald-400 w-[2px] rounded-full animate-[bar-wave_1.2s_ease-in-out_0.6s_infinite]"></span>
+                  </span>
+                  <span className="text-emerald-400 text-[10px] font-semibold tracking-wide uppercase">
+                    Now Playing
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Icon icon="ri:spotify-fill" width="12" className="text-zinc-400 shrink-0" />
+                  <span className="text-zinc-400 text-[10px] font-medium tracking-wide uppercase">
+                    Offline • Last Played
+                  </span>
+                </>
+              )}
             </div>
             <a 
               href={track.songUrl} 

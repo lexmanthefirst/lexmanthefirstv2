@@ -66,37 +66,50 @@ export const onRequest = async (context: {
       },
     })
 
-    if (spotifyResponse.status === 204 || spotifyResponse.status > 400) {
-      return new Response(
-        JSON.stringify({ isPlaying: false, message: 'No track currently playing' }),
-        { status: 200, headers }
-      )
+    if (spotifyResponse.status === 200) {
+      const trackData = await spotifyResponse.json() as any
+      if (trackData && trackData.item && trackData.is_playing) {
+        return new Response(
+          JSON.stringify({
+            isPlaying: true,
+            title: trackData.item.name,
+            artist: trackData.item.artists.map((art: any) => art.name).join(', '),
+            album: trackData.item.album.name,
+            albumImageUrl: trackData.item.album.images[0]?.url,
+            songUrl: trackData.item.external_urls.spotify,
+          }),
+          { status: 200, headers }
+        )
+      }
     }
 
-    const trackData = await spotifyResponse.json() as any
-    if (!trackData || !trackData.item) {
-      return new Response(
-        JSON.stringify({ isPlaying: false, message: 'No track playing' }),
-        { status: 200, headers }
-      )
-    }
+    // 3. Fallback: Fetch recently played track if nothing is actively playing
+    const recentResponse = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    })
 
-    const isPlaying = trackData.is_playing
-    const title = trackData.item.name
-    const artist = trackData.item.artists.map((art: any) => art.name).join(', ')
-    const album = trackData.item.album.name
-    const albumImageUrl = trackData.item.album.images[0]?.url
-    const songUrl = trackData.item.external_urls.spotify
+    if (recentResponse.status === 200) {
+      const recentData = await recentResponse.json() as any
+      const lastTrack = recentData.items?.[0]?.track
+      if (lastTrack) {
+        return new Response(
+          JSON.stringify({
+            isPlaying: false,
+            title: lastTrack.name,
+            artist: lastTrack.artists.map((art: any) => art.name).join(', '),
+            album: lastTrack.album.name,
+            albumImageUrl: lastTrack.album.images[0]?.url,
+            songUrl: lastTrack.external_urls.spotify,
+          }),
+          { status: 200, headers }
+        )
+      }
+    }
 
     return new Response(
-      JSON.stringify({
-        isPlaying,
-        title,
-        artist,
-        album,
-        albumImageUrl,
-        songUrl,
-      }),
+      JSON.stringify({ isPlaying: false, message: 'No track found' }),
       { status: 200, headers }
     )
   } catch (error: any) {
