@@ -50,17 +50,17 @@ export const SpotifyWidget: React.FC = () => {
           href={track.songUrl || '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 p-2.5 pr-4 rounded-xl bg-zinc-900/50 hover:bg-zinc-900/80 border border-white/10 hover:border-emerald-500/40 backdrop-blur-md shadow-md transition-all duration-300 max-w-full sm:max-w-xs"
+          className="flex items-center gap-3 p-2.5 pr-4 rounded-xl bg-zinc-900/50 backdrop-blur-md max-w-full sm:max-w-xs"
         >
           {/* Spinning Vinyl Album Cover Art */}
-          <div className="relative shrink-0 w-10 h-10 rounded-full overflow-hidden border border-white/15 shadow-sm group-hover:scale-105 transition-transform duration-300">
+          <div className="relative shrink-0 w-10 h-10 rounded-full overflow-hidden">
             <img
               src={track.albumImageUrl}
               alt={track.title}
               className={`w-full h-full object-cover ${track.isPlaying ? 'animate-[spin_20s_linear_infinite]' : ''}`}
             />
             {/* Center vinyl hole */}
-            <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-zinc-950/80 border border-white/20"></div>
+            <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-zinc-950/80"></div>
           </div>
 
           {/* Track Details */}
@@ -77,7 +77,7 @@ export const SpotifyWidget: React.FC = () => {
               )}
             </div>
 
-            <p className="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors truncate max-w-[140px] xs:max-w-[180px] sm:max-w-[170px] text-[13px] leading-tight">
+            <p className="font-semibold text-zinc-100 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-[170px] text-[13px] leading-tight">
               {track.title}
             </p>
             <p className="text-[11px] text-zinc-400 truncate max-w-[140px] xs:max-w-[180px] sm:max-w-[170px]">
@@ -86,7 +86,7 @@ export const SpotifyWidget: React.FC = () => {
           </div>
 
           {/* Spotify Icon */}
-          <div className="shrink-0 pl-1 text-zinc-400 group-hover:text-emerald-400 transition-colors">
+          <div className="shrink-0 pl-1 text-zinc-400">
             <Icon icon="ri:spotify-fill" width="18" />
           </div>
         </a>
