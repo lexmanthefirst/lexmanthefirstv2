@@ -66,45 +66,57 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Sticky Social Media Icons (Continuous Interpolated Glass) */}
-          <div
-            className="pointer-events-auto flex items-center gap-4 text-zinc-400 text-lg transition-colors duration-200"
-            style={{
-              padding: `${scrollProgress * 6 + 2}px ${scrollProgress * 10 + 0}px`,
-              borderRadius: '9999px',
-              backgroundColor: `rgba(9, 9, 11, ${scrollProgress * 0.7})`,
-              backdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
-              WebkitBackdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
-              color: scrollProgress > 0.5 ? 'rgba(244, 244, 245, 0.9)' : undefined,
-            }}
-          >
-            <a 
-              href="https://x.com/lexmanthefirst" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="X profile"
-              className="hover:text-white transition-colors"
-            >
-              <Icon icon="ri:twitter-x-fill" width="18" />
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/okhitoya-alex/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="LinkedIn profile"
-              className="hover:text-white transition-colors"
-            >
-              <Icon icon="ri:linkedin-fill" width="18" />
-            </a>
-            <a 
-              href="https://github.com/lexmanthefirst" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="GitHub profile"
-              className="hover:text-white transition-colors"
-            >
-              <Icon icon="ri:github-fill" width="18" />
-            </a>
-          </div>
+          {(() => {
+            const isLight = typeof document !== 'undefined' && document.documentElement.classList.contains('light')
+            const bg = isLight
+              ? `rgba(244, 244, 245, ${scrollProgress * 0.85})`
+              : `rgba(9, 9, 11, ${scrollProgress * 0.7})`
+            const color = isLight
+              ? (scrollProgress > 0.5 ? '#09090b' : '#52525b')
+              : (scrollProgress > 0.5 ? '#f4f4f5' : '#a1a1aa')
+
+            return (
+              <div
+                className="pointer-events-auto flex items-center gap-4 text-lg transition-colors duration-200"
+                style={{
+                  padding: `${scrollProgress * 6 + 2}px ${scrollProgress * 10 + 0}px`,
+                  borderRadius: '9999px',
+                  backgroundColor: bg,
+                  backdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
+                  WebkitBackdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
+                  color: color,
+                }}
+              >
+                <a 
+                  href="https://x.com/lexmanthefirst" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="X profile"
+                  className="hover:opacity-100 transition-opacity"
+                >
+                  <Icon icon="ri:twitter-x-fill" width="18" />
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/okhitoya-alex/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
+                  className="hover:opacity-100 transition-opacity"
+                >
+                  <Icon icon="ri:linkedin-fill" width="18" />
+                </a>
+                <a 
+                  href="https://github.com/lexmanthefirst" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="GitHub profile"
+                  className="hover:opacity-100 transition-opacity"
+                >
+                  <Icon icon="ri:github-fill" width="18" />
+                </a>
+              </div>
+            )
+          })()}
         </div>
 
         {/* Name & Role */}
