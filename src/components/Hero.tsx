@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { Link } from '@tanstack/react-router'
 import { Icon } from '@iconify/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -65,33 +64,33 @@ export const Hero: React.FC = () => {
             id="hero-social"
             className="hero-social-capsule pointer-events-auto flex items-center gap-4 text-zinc-400 text-lg transition-colors duration-200"
           >
-            <Link 
-              to="https://x.com/lexmanthefirst" 
+            <a 
+              href="https://x.com/lexmanthefirst" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="X profile"
               className="hover:opacity-100 transition-opacity"
             >
               <Icon icon="ri:twitter-x-fill" width="18" />
-            </Link>
-            <Link 
-              to="https://www.linkedin.com/in/okhitoya-alex/" 
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/okhitoya-alex/" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="LinkedIn profile"
               className="hover:opacity-100 transition-opacity"
             >
               <Icon icon="ri:linkedin-fill" width="18" />
-            </Link>
-            <Link 
-              to="https://github.com/lexmanthefirst" 
+            </a>
+            <a 
+              href="https://github.com/lexmanthefirst" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="GitHub profile"
               className="hover:opacity-100 transition-opacity"
             >
               <Icon icon="ri:github-fill" width="18" />
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -107,14 +106,14 @@ export const Hero: React.FC = () => {
         <div className="space-y-4 text-zinc-300 text-xs md:text-sm font-normal leading-relaxed mb-8">
           <p>
             Software Engineer with 4+ years of experience, lead full-stack developer working on{' '}
-            <Link 
-              to="https://github.com/lexmanthefirst" 
+            <a 
+              href="https://github.com/lexmanthefirst" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white underline underline-offset-4 hover:text-zinc-300 transition-colors"
             >
               crosstalk AI
-            </Link>.
+            </a>.
           </p>
           <p>
             I help startups, founders, and teams build better products where{' '}
@@ -127,12 +126,12 @@ export const Hero: React.FC = () => {
 
         {/* Action Button */}
         <div className="pt-2">
-          <Link
-            to="mailto:hello@lextoya.me"
+          <a
+            href="mailto:hello@lextoya.me"
             className="inline-block px-6 py-2.5 bg-white text-black rounded-full text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
           >
             Contact me
-          </Link>
+          </a>
         </div>
       </div>
     </section>
