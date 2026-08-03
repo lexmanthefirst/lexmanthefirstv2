@@ -1,21 +1,82 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 
 export const Hero: React.FC = () => {
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const rafId = useRef<number | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current)
+      }
+
+      rafId.current = requestAnimationFrame(() => {
+        // Calculate scroll progress continuously between 0px and 120px
+        const currentScroll = window.scrollY
+        const maxScroll = 120
+        const progress = Math.min(1, Math.max(0, currentScroll / maxScroll))
+        setScrollProgress(progress)
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial position check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current)
+      }
+    }
+  }, [])
+
+  // Pixel-continuous interpolated calculations
+  // Size: 80px (w-20) down to 40px (w-10)
+  const currentSize = 80 - scrollProgress * 40
+  // Radius: 16px (rounded-2xl) smoothly interpolating up to 50% (circle)
+  const currentRadius = 16 + scrollProgress * (currentSize / 2 - 16)
+  // Grayscale: 100% -> 0% (gradually reveals original color as it grounds to top)
+  const currentGrayscale = 100 - scrollProgress * 100
+
   return (
     <section className="pt-24 pb-16 relative" id="hero">
       <div className="max-w-2xl mx-auto px-6">
-        {/* Top Header: Profile Image + Social Icons */}
-        <div className="flex justify-between items-start mb-8">
-          <div className="w-20 h-20 rounded-2xl overflow-hidden bg-zinc-800 border border-white/10 shadow-lg">
+        {/* Sticky Header Row: Profile Image + Social Icons */}
+        <div className="sticky top-5 z-40 flex justify-between items-center mb-8 pointer-events-none py-1">
+          {/* Continuous Pixel-Interpolated Hero Avatar */}
+          <div
+            className="pointer-events-auto overflow-hidden bg-zinc-800 shadow-lg transform-gpu will-change-[width,height,border-radius]"
+            style={{
+              width: `${currentSize}px`,
+              height: `${currentSize}px`,
+              borderRadius: `${currentRadius}px`,
+              boxShadow: scrollProgress > 0.2 ? `0 10px 30px -5px rgba(0, 0, 0, ${scrollProgress * 0.6})` : undefined,
+            }}
+          >
             <img 
               src="/DSC_0471.jpg" 
               alt="Alex Okhitoya" 
-              className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover contrast-125 hover:grayscale-0 transition-[filter] duration-300"
+              style={{
+                filter: `grayscale(${currentGrayscale}%) contrast(125%)`,
+                borderRadius: `${currentRadius}px`,
+              }}
             />
           </div>
 
-          <div className="flex items-center gap-4 text-zinc-400 text-lg pt-2">
+          {/* Sticky Social Media Icons (Continuous Interpolated Glass) */}
+          <div
+            className="pointer-events-auto flex items-center gap-4 text-zinc-400 text-lg transition-colors duration-200"
+            style={{
+              padding: `${scrollProgress * 6 + 2}px ${scrollProgress * 10 + 0}px`,
+              borderRadius: '9999px',
+              backgroundColor: `rgba(9, 9, 11, ${scrollProgress * 0.7})`,
+              backdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
+              WebkitBackdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
+              color: scrollProgress > 0.5 ? 'rgba(244, 244, 245, 0.9)' : undefined,
+            }}
+          >
             <a 
               href="https://x.com/lexmanthefirst" 
               target="_blank" 
