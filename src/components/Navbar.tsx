@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { Link } from '@tanstack/react-router'
 import { Icon } from '@iconify/react'
-import { CommandPalette } from './CommandPalette'
 import { audio } from '../utils/audio'
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isPaletteOpen, setIsPaletteOpen] = useState(false)
   const [isMuted, setIsMuted] = useState(audio.getMuteState())
-
-  // Listen for Ctrl+K / Cmd+K shortcuts to open palette
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault()
-        setIsPaletteOpen(prev => !prev)
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
 
   return (
     <>
@@ -28,18 +14,18 @@ export const Navbar: React.FC = () => {
         <div className="pointer-events-auto bg-zinc-950/40 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 flex items-center gap-1 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-white/20 hover:bg-zinc-900/40">
           
           {/* Logo inside Capsule */}
-          <a href="#" className="logo-font text-xl md:text-2xl text-white px-2 py-1 transition-all leading-none">
+          <Link to="/" className="logo-font text-xl md:text-2xl text-white px-2 py-1 transition-all leading-none">
             Lex<span className="text-lime-400">man</span>
-          </a>
+          </Link>
           
           <div className="w-px h-4 bg-white/10 mx-1 md:mx-2"></div>
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-1 text-xs text-zinc-400 font-medium">
-            <a href="#hero" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">About</a>
-            <a href="#projects" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Projects</a>
-            <a href="#experience" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Experience</a>
-            <a href="#contact" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Contact</a>
+            <Link to="/" hash="hero" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">About</Link>
+            <Link to="/" hash="projects" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Projects</Link>
+            <Link to="/" hash="experience" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Experience</Link>
+            <Link to="/" hash="contact" className="px-5 py-2.5 hover:text-white rounded-full hover:bg-white/5 transition-all">Contact</Link>
             <div className="w-px h-4 bg-white/10 mx-2"></div>
             <a 
               href="/Alex-Okhitoya-AI-Engineer.pdf"
@@ -52,7 +38,7 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Actions (Volume & Search inside Capsule) */}
+          {/* Mobile Actions (Volume Mute Toggle) */}
           <div className="flex md:hidden items-center gap-1.5 ml-2 mr-1">
             <button 
               onClick={() => {
@@ -66,13 +52,6 @@ export const Navbar: React.FC = () => {
               aria-label={isMuted ? "Unmute site audio" : "Mute site audio"}
             >
               <Icon icon={isMuted ? "solar:volume-cross-linear" : "solar:volume-loud-linear"} width="15" />
-            </button>
-            <button 
-              onClick={() => setIsPaletteOpen(true)}
-              className="text-zinc-400 hover:text-white transition-all flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/5 active:scale-95"
-              aria-label="Open Command Palette"
-            >
-              <Icon icon="solar:magnifer-linear" width="15" />
             </button>
           </div>
 
@@ -102,48 +81,43 @@ export const Navbar: React.FC = () => {
         >
           <Icon icon={isMuted ? "solar:volume-cross-linear" : "solar:volume-loud-linear"} width="16" />
         </button>
-
-        {/* Command Palette Trigger */}
-        <button 
-          onClick={() => setIsPaletteOpen(true)}
-          className="text-zinc-400 hover:text-white transition-all flex items-center justify-center w-10 h-10 border border-white/10 rounded-full bg-zinc-950/40 backdrop-blur-xl shadow-lg hover:border-white/20 active:scale-95"
-          aria-label="Open Command Palette"
-        >
-          <Icon icon="solar:magnifer-linear" width="16" />
-        </button>
       </div>
 
       {/* Mobile Links Dropdown Menu */}
       {isOpen && (
         <div className="fixed inset-x-6 top-28 z-40 md:hidden border border-white/15 bg-zinc-950/95 backdrop-blur-2xl rounded-2xl p-6 flex flex-col gap-4 text-sm text-zinc-400 font-light shadow-2xl">
-          <a 
-            href="#hero" 
+          <Link 
+            to="/" 
+            hash="hero"
             onClick={() => setIsOpen(false)} 
             className="hover:text-white transition-colors py-2 border-b border-white/5 block"
           >
             About
-          </a>
-          <a 
-            href="#projects" 
+          </Link>
+          <Link 
+            to="/" 
+            hash="projects"
             onClick={() => setIsOpen(false)} 
             className="hover:text-white transition-colors py-2 border-b border-white/5 block"
           >
             Projects
-          </a>
-          <a 
-            href="#experience" 
+          </Link>
+          <Link 
+            to="/" 
+            hash="experience"
             onClick={() => setIsOpen(false)} 
             className="hover:text-white transition-colors py-2 border-b border-white/5 block"
           >
             Experience
-          </a>
-          <a 
-            href="#contact" 
+          </Link>
+          <Link 
+            to="/" 
+            hash="contact"
             onClick={() => setIsOpen(false)} 
             className="hover:text-white transition-colors py-2 border-b border-white/5 block"
           >
             Contact
-          </a>
+          </Link>
           <a 
             href="/Alex-Okhitoya-AI-Engineer.pdf"
             download="Alex-Okhitoya-AI-Engineer.pdf"
@@ -156,9 +130,6 @@ export const Navbar: React.FC = () => {
           </a>
         </div>
       )}
-
-      {/* Unified Command Palette Modal */}
-      <CommandPalette isOpen={isPaletteOpen} onClose={() => setIsPaletteOpen(false)} />
     </>
   )
 }

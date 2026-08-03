@@ -1,122 +1,98 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
+import { Link } from '@tanstack/react-router'
 import { Icon } from '@iconify/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export const Hero: React.FC = () => {
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const rafId = useRef<number | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (rafId.current !== null) {
-        cancelAnimationFrame(rafId.current)
-      }
+  useGSAP(() => {
+    // GSAP ScrollTrigger timeline locked 1-to-1 to scroll position (no fading, no lag)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top top',
+        end: '+=120',
+        scrub: true,
+      },
+    })
 
-      rafId.current = requestAnimationFrame(() => {
-        // Calculate scroll progress continuously between 0px and 120px
-        const currentScroll = window.scrollY
-        const maxScroll = 120
-        const progress = Math.min(1, Math.max(0, currentScroll / maxScroll))
-        setScrollProgress(progress)
-      })
-    }
+    // 1. Morph Hero Avatar container (80px -> 40px, rounded-2xl -> rounded-full circle)
+    tl.to('#hero-avatar', {
+      width: 40,
+      height: 40,
+      borderRadius: '9999px',
+      ease: 'none',
+    }, 0)
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initial position check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (rafId.current !== null) {
-        cancelAnimationFrame(rafId.current)
-      }
-    }
-  }, [])
-
-  // Pixel-continuous interpolated calculations
-  // Size: 80px (w-20) down to 40px (w-10)
-  const currentSize = 80 - scrollProgress * 40
-  // Radius: 16px (rounded-2xl) smoothly interpolating up to 50% (circle)
-  const currentRadius = 16 + scrollProgress * (currentSize / 2 - 16)
-  // Grayscale: 100% -> 0% (gradually reveals original color as it grounds to top)
-  const currentGrayscale = 100 - scrollProgress * 100
+    // 2. Morph Sticky Social Icons (padding, border-radius, background blur)
+    tl.to('#hero-social', {
+      paddingTop: 8,
+      paddingBottom: 8,
+      paddingLeft: 14,
+      paddingRight: 14,
+      borderRadius: '9999px',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
+      ease: 'none',
+    }, 0)
+  }, { scope: containerRef })
 
   return (
-    <section className="pt-24 pb-16 relative" id="hero">
+    <section className="pt-24 pb-16 relative" id="hero" ref={containerRef}>
       <div className="max-w-2xl mx-auto px-6">
         {/* Sticky Header Row: Profile Image + Social Icons */}
         <div className="sticky top-5 z-40 flex justify-between items-center mb-8 pointer-events-none py-1">
-          {/* Continuous Pixel-Interpolated Hero Avatar */}
+          {/* GSAP ScrollTrigger Hero Avatar */}
           <div
-            className="pointer-events-auto overflow-hidden bg-zinc-800 shadow-lg transform-gpu will-change-[width,height,border-radius]"
-            style={{
-              width: `${currentSize}px`,
-              height: `${currentSize}px`,
-              borderRadius: `${currentRadius}px`,
-              boxShadow: scrollProgress > 0.2 ? `0 10px 30px -5px rgba(0, 0, 0, ${scrollProgress * 0.6})` : undefined,
-            }}
+            id="hero-avatar"
+            className="pointer-events-auto overflow-hidden shadow-lg w-20 h-20 rounded-2xl transform-gpu"
           >
             <img 
+              id="hero-avatar-img"
               src="/DSC_0471.jpg" 
               alt="Alex Okhitoya" 
-              className="w-full h-full object-cover contrast-125 hover:grayscale-0 transition-[filter] duration-300"
-              style={{
-                filter: `grayscale(${currentGrayscale}%) contrast(125%)`,
-                borderRadius: `${currentRadius}px`,
-              }}
+              className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Sticky Social Media Icons (Continuous Interpolated Glass) */}
-          {(() => {
-            const isLight = typeof document !== 'undefined' && document.documentElement.classList.contains('light')
-            const bg = isLight
-              ? `rgba(244, 244, 245, ${scrollProgress * 0.85})`
-              : `rgba(9, 9, 11, ${scrollProgress * 0.7})`
-            const color = isLight
-              ? (scrollProgress > 0.5 ? '#09090b' : '#52525b')
-              : (scrollProgress > 0.5 ? '#f4f4f5' : '#a1a1aa')
-
-            return (
-              <div
-                className="pointer-events-auto flex items-center gap-4 text-lg transition-colors duration-200"
-                style={{
-                  padding: `${scrollProgress * 6 + 2}px ${scrollProgress * 10 + 0}px`,
-                  borderRadius: '9999px',
-                  backgroundColor: bg,
-                  backdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
-                  WebkitBackdropFilter: scrollProgress > 0.05 ? `blur(${scrollProgress * 12}px)` : 'none',
-                  color: color,
-                }}
-              >
-                <a 
-                  href="https://x.com/lexmanthefirst" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="X profile"
-                  className="hover:opacity-100 transition-opacity"
-                >
-                  <Icon icon="ri:twitter-x-fill" width="18" />
-                </a>
-                <a 
-                  href="https://www.linkedin.com/in/okhitoya-alex/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn profile"
-                  className="hover:opacity-100 transition-opacity"
-                >
-                  <Icon icon="ri:linkedin-fill" width="18" />
-                </a>
-                <a 
-                  href="https://github.com/lexmanthefirst" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="GitHub profile"
-                  className="hover:opacity-100 transition-opacity"
-                >
-                  <Icon icon="ri:github-fill" width="18" />
-                </a>
-              </div>
-            )
-          })()}
+          {/* GSAP ScrollTrigger Sticky Social Media Icons */}
+          <div
+            id="hero-social"
+            className="hero-social-capsule pointer-events-auto flex items-center gap-4 text-zinc-400 text-lg transition-colors duration-200"
+          >
+            <Link 
+              to="https://x.com/lexmanthefirst" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="X profile"
+              className="hover:opacity-100 transition-opacity"
+            >
+              <Icon icon="ri:twitter-x-fill" width="18" />
+            </Link>
+            <Link 
+              to="https://www.linkedin.com/in/okhitoya-alex/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="hover:opacity-100 transition-opacity"
+            >
+              <Icon icon="ri:linkedin-fill" width="18" />
+            </Link>
+            <Link 
+              to="https://github.com/lexmanthefirst" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="hover:opacity-100 transition-opacity"
+            >
+              <Icon icon="ri:github-fill" width="18" />
+            </Link>
+          </div>
         </div>
 
         {/* Name & Role */}
@@ -131,14 +107,14 @@ export const Hero: React.FC = () => {
         <div className="space-y-4 text-zinc-300 text-xs md:text-sm font-normal leading-relaxed mb-8">
           <p>
             Software Engineer with 4+ years of experience, lead full-stack developer working on{' '}
-            <a 
-              href="https://github.com/lexmanthefirst" 
+            <Link 
+              to="https://github.com/lexmanthefirst" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white underline underline-offset-4 hover:text-zinc-300 transition-colors"
             >
               crosstalk AI
-            </a>.
+            </Link>.
           </p>
           <p>
             I help startups, founders, and teams build better products where{' '}
@@ -151,12 +127,12 @@ export const Hero: React.FC = () => {
 
         {/* Action Button */}
         <div className="pt-2">
-          <a
-            href="mailto:hello@lextoya.me"
+          <Link
+            to="mailto:hello@lextoya.me"
             className="inline-block px-6 py-2.5 bg-white text-black rounded-full text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
           >
             Contact me
-          </a>
+          </Link>
         </div>
       </div>
     </section>
