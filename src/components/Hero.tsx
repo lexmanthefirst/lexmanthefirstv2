@@ -105,22 +105,25 @@ export const Hero: React.FC = () => {
         {/* Bio Paragraphs */}
         <div className="space-y-4 text-zinc-300 text-xs md:text-sm font-normal leading-relaxed mb-8">
           <p>
-            Software Engineer with 4+ years of experience, lead full-stack developer working on{' '}
+            I build fast and resilient systems that helps startups move faster.{' '} Lead full-stack developer working on{' '}
             <a 
-              href="https://github.com/lexmanthefirst" 
+              href="https://crosscall.lexman.software" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white underline underline-offset-4 hover:text-zinc-300 transition-colors"
             >
-              crosstalk AI
+              Orase AI
             </a>.
           </p>
           <p>
-            I help startups, founders, and teams build better products where{' '}
+            As a Full-Stack Engineer with 4+ years of experience, I design and build scalable applications where {' '}
             <span className="bg-blue-600 dark:bg-blue-600/90 text-white px-1.5 py-0.5 rounded text-[14px] font-semibold mx-0.5 inline-block">
               I engineer for speed
             </span>{' '}
-            through high-throughput microservices, agentic workflows, and fast reliable backend infrastructure.
+            through high-performance backend systems, AI-powered products, agentic workflows, and cloud infrastructure.
+          </p>
+          <p>
+            If speed, reliability, and execution matter, I am the guy you need on your team.
           </p>
         </div>
 
@@ -128,7 +131,7 @@ export const Hero: React.FC = () => {
         <div className="pt-2">
           <a
             href="mailto:hello@lextoya.me"
-            className="inline-block px-6 py-2.5 bg-white text-black rounded-full text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
+            className="inline-block px-2.5 py-2 bg-white text-black rounded-lg text-xs font-semibold hover:bg-zinc-200 transition-all shadow-md active:scale-95"
           >
             Contact me
           </a>
