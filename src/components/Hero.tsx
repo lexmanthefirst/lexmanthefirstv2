@@ -107,7 +107,7 @@ export const Hero: React.FC = () => {
           <p>
             I build fast and resilient systems that helps startups move faster.{' '} Lead full-stack developer working on{' '}
             <a 
-              href="https://crosscall.lexman.software" 
+              href="https://orase.tech" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-white underline underline-offset-4 hover:text-zinc-300 transition-colors"
@@ -116,7 +116,7 @@ export const Hero: React.FC = () => {
             </a>.
           </p>
           <p>
-            As a Full-Stack Engineer with 4+ years of experience, I design and build scalable applications where {' '}
+            As a Software Engineer with 4+ years of experience, I design and build scalable applications where {' '}
             <span className="bg-blue-600 dark:bg-blue-600/90 text-white px-1.5 py-0.5 rounded text-[14px] font-semibold mx-0.5 inline-block">
               I engineer for speed
             </span>{' '}

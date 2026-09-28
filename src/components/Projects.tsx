@@ -6,9 +6,9 @@ export const Projects: React.FC = () => {
 
   const projects = [
     {
-      name: 'crosstalk AI',
+      name: 'Orase AI',
       desc: 'Real-time conversational AI call agent integrating Asterisk VoIP, FastAPI, NATS, and vector databases.',
-      link: 'https://github.com/lexmanthefirst',
+      link: 'https://orase.tech',
       videoUrl: '/crosstalk_demo.mp4',
       image: '/crosstalk_thumb.png',
       hasVideoDemo: true
